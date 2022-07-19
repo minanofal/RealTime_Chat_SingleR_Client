@@ -1,0 +1,96 @@
+<div class="registerbanner">
+    <div class="container-fluid text-cente">
+        <div class="row">
+            <h1>Welcome To Online Chat</h1>
+            <hr>
+            <div class="col-lg-6">
+                <small id="emailHelp"   *ngIf="error" >*{{error}}</small>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="row ">
+                        <div class="col-lg-6">
+                            <input 
+                            type="text"
+                            class="form-control"
+                             placeholder="enter your first name"
+                             id="firstName" 
+                             name="firstName"
+                             formControlName="firstName">
+                            <small id="emailHelp" *ngIf="FirstName?.touched &&FirstName?.invalid" >*FirstName is required</small>
+                        </div> <br> <br>    
+                        <div class="col-lg-6">
+                            <input type="text"
+                            class="form-control"
+                            placeholder="enter your last name"
+                            id="lastName" 
+                            name="lastName"
+                            formControlName="lastName">
+                        <small id="emailHelp"  *ngIf="LastName?.touched &&LastName?.invalid" >*LastName is required</small>
+                        </div>
+                    </div><br>
+                    <div>
+                        <input type="email" 
+                        class="form-control"
+                        placeholder="enter you email"
+                        id="email" 
+                        name="email"
+                        formControlName="email">
+                        <small id="emailHelp"   *ngIf="Email?.touched &&Email?.invalid" >*Email is Required (#Cx..@..)</small>
+                    </div><br>
+                    <div>
+                        <input type="text"
+                         class="form-control"
+                         placeholder="User name"
+                         id="userName" 
+                         name="userName"
+                         formControlName="userName">
+                         <small id="emailHelp"   *ngIf="UserName?.touched &&UserName?.invalid" >*UserName is required</small>
+                    </div><br>
+                    <div>
+                        <input type="password"
+                         class="form-control"
+                         placeholder="enter Password"
+                         id="password" 
+                         name="password"
+                         formControlName="password">
+                         <small id="emailHelp"   *ngIf="Password?.touched &&Password?.invalid" >*password must be  At least 8 characters in length , Uppercase letters, Lowercase letters,Numbers Special characters</small>
+                    </div><br>
+                    <div>
+                        <input type="password"
+                         class="form-control"
+                         placeholder="confirm Password"
+                         id="confirmPassword" 
+                        name="confirmPassword"
+                        formControlName="confirmPassword">
+                        <small id="emailHelp"   *ngIf="ConfirmPassword && this.form.get('confirmPassword')?.touched" >*Password Not Match</small>
+                    </div><br>
+
+                    <input type="radio"
+                     class="form-check-input"
+                     name="gender"
+                     id="gender"
+                        value="M" 
+                      checked=""
+                      formControlName="gender"> 
+                    <span class="radio"><i class="bi bi-gender-male"></i> Male</span>   &nbsp; &nbsp;
+
+                    <input
+                     type="radio" 
+                     class="form-check-input" 
+                     name="gender"
+                     id="gender"
+                      value="F" 
+                      checked=""
+                      formControlName="gender"> 
+                    <span class="radio"> <i class="bi bi-gender-female"></i> Female</span> <br>
+                
+                <button [disabled]="form.invalid" type="submit" class="singup"> Sign Up <i class="bi bi-box-arrow-right"></i></button>
+            </form>
+        </div>
+            <div class="col-lg-6">
+                <hr>
+                <h1>If You Have Account </h1> 
+                <a routerLink="/login" class="login-btn"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+            </div>
+        </div>
+    </div>
+</div>

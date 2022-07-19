@@ -1,0 +1,38 @@
+<app-navbar (friendRequist)="FriendRequist()" ></app-navbar>
+<body>
+    <div class="container search">
+        <div class="search-input">
+            <input type="text" class="form-control" placeholder="search..."
+            (input)="Search($event.target)">
+            <i class="bi bi-search"></i>
+           
+        </div>
+        
+    </div>
+    <hr class="container">
+    <div class="container search-result">
+        <div class="items">
+            <div class="block" *ngFor="let user of usersSearch">
+                <div class="imgbx">
+                    <img [src]="baseurl+user.imageUrl" class="cover">
+                </div>
+                <div class="details">
+                    <div class="listhead">
+                        <h4>{{user.firstName +" "+user.lastName}}</h4>
+                    </div>
+                    <div class="message">
+                        <p>{{user.userName}}</p>
+                     
+                    </div>
+                </div>
+                <div class="status" *ngIf="user.status ==='not friend'" (click)="SendAdd(user)"><i  class="bi bi-person-plus-fill"></i> <Span>Add Friend</Span></div>
+                <div class="status" *ngIf="user.status ==='send requist'" (click)="CancelAdd(user)"> <i  class="bi bi-person-check-fill"></i>  <span>Reqist sent</span></div>
+                <div *ngIf="user.status ==='friend'"class="status"><i  class="bi bi-person-fill"></i> <span>Friend</span></div>
+            </div> <br>
+            
+        </div>
+        
+        
+    </div>
+    <app-friendrequistlist *ngIf="ShowFriendRequistList" (ClosefriendRequistList)="CloseFriendRequistList()" ></app-friendrequistlist>
+</body>

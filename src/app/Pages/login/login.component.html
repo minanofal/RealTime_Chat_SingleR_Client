@@ -1,0 +1,74 @@
+<div class="loginBaner">
+    <div class="container content">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1>Online Chat <br> life better with friends </h1>
+                <a routerLink="/register" class="Registerbtn"> Join Us</a>
+            </div>
+            <div class="col-lg-6">
+                
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <h2> Login</h2>
+                    <hr>
+                    <small  class="text" *ngIf="errors">{{errors}}</small>
+                    <div>
+                        <h3>Email</h3>
+                        <input type="email" 
+                        class="form-control" 
+                        placeholder="Enter your email (#Cx..@..)"
+                        id="email"
+                        name="email"
+                        formControlName="email">
+                        <small  class="text" *ngIf="Email?.touched &&Email?.invalid" >*Email is Required (#Cx..@..)</small>
+                    </div>
+                    <div>
+                        <h3>Password</h3>
+                        <input type="password"
+                        class="form-control"
+                        placeholder="Enter your Password"
+                        id="password"
+                        name="password"
+                        formControlName="password">
+                        <small id="emailHelp"  class="text" *ngIf="Password?.touched &&Password?.invalid" >*Password is required</small>
+                    </div>
+                    <div>
+                        <button [disabled]="form.invalid" type="submit" class="login-btn"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="text-center about container">
+            <h2>Online Chat</h2>
+            <div>
+                You can contact your friends with full privacy and security
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container Computer_demo">
+   
+        <div class="col-lg-12 img">
+            <img   src="../../../assets/ProductImages/1.png">
+        </div>
+        <div class="col-lg-12 img">
+            <img src="../../../assets/ProductImages/2.png">
+        </div>
+    
+</div>
+<div class="container mobile_demo">
+    <div class="row">
+        <div class="col-lg-4 imgmob">
+            <img   src="../../../assets/ProductImages/3.png">
+        </div>
+        <div class="col-lg-4 imgmob">
+            <img   src="../../../assets/ProductImages/4.png">
+        </div>
+        <div class="col-lg-4 imgmob">
+            <img   src="../../../assets/ProductImages/5.png">
+        </div>
+    </div>
+</div>

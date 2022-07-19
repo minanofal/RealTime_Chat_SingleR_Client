@@ -1,0 +1,157 @@
+<app-navbar (friendRequist)="FriendRequist()" ></app-navbar>
+<body>
+    <div class="contain">
+        <div class="leftside">
+            <!-- header -->
+            <div class="header">
+                
+                <div class="userimg imgbx">
+                    <img  [src]="image" class="cover">
+                </div>
+                <span  class="Name">{{firstname +" " +lastname}}</span> 
+               
+            </div>
+            <!-- Search -->
+            <div class="search_chat">
+                <input type="text"
+                name="search"
+                 placeholder=" Search ..." 
+                 (input)="Search($event.target)">
+                <i class="bi bi-search"></i>
+            </div>
+            <!-- Chat list -->
+            <div class="chat-list" *ngIf=" messageServices.friends.length !=0 ">   
+                <div  (click)="GetConnection(friend)" class="{{friend.connectionId == messageServices.CurrentUser.connectionId ?'block active' : 'block'}}" *ngFor="let friend of messageServices.friends">
+                    <div class="imgbx">
+                        <img [src]="baseurl+friend.imageUrl" class="cover">
+                    </div>
+                    
+                    <div class="details">
+                        <div class="listhead">
+                            <h4>{{friend.firstName +" "+friend.lastName}}</h4>
+                            <p class="Time Timeactive" *ngIf="friend.lastMessage">{{friend.sentAt.substring(11,16)}}</p>
+                        </div>
+                        <div class="message">
+                            <p *ngIf="friend.senderUserName == username && friend.lastMessage" >You: {{friend.lastMessage}}</p>
+                            <p *ngIf="friend.senderUserName != username && friend.lastMessage">{{friend.firstName}} : {{friend.lastMessage}}</p>
+                            <p *ngIf="!friend.lastMessage">No Message Yet!</p>
+                            <b *ngIf="friend.senderUserName != username &&!friend.isSeen && friend.lastMessage && friend.unseenMessagesCount<10">{{friend.unseenMessagesCount}}</b>
+                            <b *ngIf="friend.senderUserName != username &&!friend.isSeen && friend.lastMessage && friend.unseenMessagesCount>=10">+9</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="rightside">
+            <div class="superheader">
+                <div class="header">
+                    <div (click)="ShowForMobile()" class="icon-formmobil">
+                        <i class="bi bi-person-lines-fill"></i>
+                    </div>
+                    <div *ngIf="messageServices.CurrentUser" class="userimg">
+                        <img [src]="baseurl+messageServices.CurrentUser.imageUrl" class="cover">
+                    </div>
+                    <span *ngIf="messageServices.CurrentUser" class="Name">{{messageServices.CurrentUser.firstName + " " + messageServices.CurrentUser.lastName}}  <br>
+                         <span class="Online"> Online</span>
+                    </span> 
+                </div>
+                
+            </div>
+            <!-- Chatbox -->
+            <div #chatbox (scroll)="onScroll($event)"  class="chatbox" id="chatbox">
+                <div  *ngFor="let message of  messageServices.messages"  class="{{ message.senderUserName == username ?'message-chat my-message' :'message-chat frnd-message'}}">
+                    <div *ngIf=" message.connectionId == messageServices.CurrentUser.connectionId" class="userimg">
+                    <img  *ngIf="message.senderUserName != username" [src]="baseurl+ messageServices.CurrentUser.imageUrl" class="cover">
+                    </div>
+                    <p *ngIf="message.connectionId == messageServices.CurrentUser.connectionId"> {{message.messageText}}<br>
+                         <span *ngIf="message.connectionId == messageServices.CurrentUser.connectionId">{{message.createdAt.substring(11,16)}}</span></p>
+                    <div *ngIf="message.connectionId == messageServices.CurrentUser.connectionId" class="userimg">
+                        <img *ngIf="message.senderUserName == username" [src]="image" class="cover">
+                       
+                    </div>
+                </div>
+                <!-- <i class="bi bi-check2 send"></i> -->
+                <div *ngIf="messageServices.messages.length >0">
+                    <div *ngIf="messageServices.currentconIdSeen == messageServices.CurrentUser.connectionId ">
+                        <div *ngIf="messageServices.messages[messageServices.messages.length-1].senderUserName == username && !messageServices.isSeen" class="seen"><i class="bi bi-check2"></i></div>
+                        <div *ngIf="messageServices.messages[messageServices.messages.length-1].senderUserName == username && messageServices.isSeen" > <img [src]="baseurl+messageServices.CurrentUser.imageUrl" alt="" class="seened"></div>
+                    </div>
+                    <div *ngIf="messageServices.currentconIdSeen != messageServices.CurrentUser.connectionId ">
+                        <div *ngIf="messageServices.messages[messageServices.messages.length-1].senderUserName == username && !messageServices.messages[messageServices.messages.length-1].seen" class="seen"><i class="bi bi-check2"></i></div>
+                        <div *ngIf="messageServices.messages[messageServices.messages.length-1].senderUserName == username && messageServices.messages[messageServices.messages.length-1].seen" > <img [src]="baseurl+messageServices.CurrentUser.imageUrl" alt="" class="seened"></div>
+                    </div>
+            </div>
+            </div>
+            <!-- Write-message -->
+            <div class="chat-box-input">
+               
+              
+                <input  
+                name="message"
+                [(ngModel)]="message"
+                type="text" 
+                placeholder="Type a message"
+                (click)="Seen()"
+                >
+                <i (click)="SendMessage()" class="bi bi-send-fill"></i>
+            </div>
+            
+        </div>
+        <!-- mobile -->
+        <div *ngIf="showfriends" class="mobilside">
+            
+            <!-- header -->
+            <div class="header">
+             
+                <div class="userimg">
+                    <img  [src]="image" class="cover">
+                </div>
+                <span class="Name">{{firstname +" " +lastname}}</span> 
+                <ul class="nav_icons">
+                    <li><i class="bi bi-chat-left-fill"></i></li>
+                    <li><i class="bi bi-three-dots-vertical"></i></li>
+                   <li *ngIf="showfriends" (click)="hiddeFreind()"><i class="bi bi-arrow-right-circle"></i></li> 
+                </ul>
+                
+            </div>
+            <!-- Search -->
+            <div class="search_chat">
+                <input type="text" 
+                placeholder=" Search ..."
+                (input)="Search($event.target)">
+                <i class="bi bi-search"></i>
+            </div>
+            <!-- chat-list -->
+            <div class="chat-list" *ngIf=" messageServices.friends.length !=0 ">   
+                <div  (click)="GetConnection(friend)" class="{{friend.connectionId == messageServices.CurrentUser.connectionId ?'block active' : 'block'}}" *ngFor="let friend of messageServices.friends">
+                    <div class="imgbx">
+                        <img [src]="baseurl+friend.imageUrl" class="cover">
+                    </div>
+                    
+                    <div class="details">
+                        <div class="listhead">
+                            <h4>{{friend.firstName +" "+friend.lastName}}</h4>
+                            <p class="Time Timeactive" *ngIf="friend.lastMessage">{{friend.sentAt.substring(11,16)}}</p>
+                        </div>
+                        <div class="message">
+                            <p *ngIf="friend.senderUserName == username && friend.lastMessage" >You: {{friend.lastMessage}}</p>
+                            <p *ngIf="friend.senderUserName != username && friend.lastMessage">{{friend.firstName}} : {{friend.lastMessage}}</p>
+                            <p *ngIf="!friend.lastMessage">No Message Yet!</p>
+                            <b *ngIf="friend.senderUserName != username &&!friend.isSeen && friend.lastMessage && friend.unseenMessagesCount<10">{{friend.unseenMessagesCount}}</b>
+                            <b *ngIf="friend.senderUserName != username &&!friend.isSeen && friend.lastMessage && friend.unseenMessagesCount>=10">+9</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+    
+        
+    </div>
+    <app-friendrequistlist *ngIf="ShowFriendRequistList" (ClosefriendRequistList)="CloseFriendRequistList()" ></app-friendrequistlist>
+
+</body>
+

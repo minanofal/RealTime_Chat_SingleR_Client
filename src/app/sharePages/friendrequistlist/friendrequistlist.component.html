@@ -1,0 +1,30 @@
+<div class="friendrequist">
+    <div class="header" >
+        <h2> <span><i class="bi bi-person-fill"></i> Friend Requists</span> <button (click)="CloseFriendRequistList()" class="close"><i class="bi bi-x"></i></button> </h2>
+       
+        <hr>
+        <div class="container items">
+            <div class="block" *ngFor="let requist of friendRequists">
+                <div class="imgbx">
+                    <img [src]="baseurl+requist.imageUrl" class="cover">
+                </div>
+                <div class="details">
+                    <div class="listhead">
+                        <h4> {{requist.firstName+" "+requist.lastName}}</h4>
+                    </div>
+                    <div class="message">
+                        <p>{{requist.userName}}</p>
+                     
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button (click)=" AcceptFriendRequist(requist.id)" class="accept">Accept</button>
+                    <button (click)="CancelFriendRequist(requist.id)" class="cancel">Cancel</button>
+                </div>
+               
+            </div>
+           
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,18 @@
+<app-navbar (friendRequist)="FriendRequist()" ></app-navbar>
+<div class=" body">
+    <div class="container text-center profile">
+        <img class="profilePicture" [src]="image">
+        <label class="add">
+            <input type="file" 
+            (change)="addPhoto($event)">
+            <i class="bi bi-camera-fill"></i> </label>
+        <hr>
+        <h5>{{firstname +" "+lastname}} <i class="bi bi-pencil-fill"></i></h5>
+        <hr>
+        <h5>User Name \ {{username}} <span><i class="bi bi-pencil-fill"></i></span></h5>
+        <hr>
+        <h5>Email \ {{email}} <span><i class="bi bi-pencil-fill"></i></span></h5>
+    </div>
+    <app-friendrequistlist *ngIf="ShowFriendRequistList" (ClosefriendRequistList)="CloseFriendRequistList()" ></app-friendrequistlist>
+
+</div>

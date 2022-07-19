@@ -1,0 +1,160 @@
+body{
+    margin: 0;
+    padding: 3%;
+    box-sizing: border-box;
+    font-family: 'Open Sans' , sans-serif;
+    background-color: rgb(88, 88, 88);
+    height: 80vh;
+  
+}
+.search{
+    
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.search-input{
+    position: relative;
+    width: 700px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+}
+.search input{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+    opacity: .6;
+    font-weight: bold;
+    border-radius: 50px;
+    padding-left: 50px;
+}
+.search-input i{
+    position: absolute;
+    left: 30px;
+    top: 12px;
+    font-size: 1.2em;
+}
+.search-result{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    width: 100%;
+}
+.block{
+    background-color:rgb(56, 56, 56) ;
+    position: relative;
+    min-width: 50%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+     align-items: center; 
+    padding-left: 10px;
+    padding-top:8px ;
+    cursor: pointer;
+    color: white;
+    margin-bottom: 10px;
+}
+.items{
+    padding: 10px 10px;
+    width: 70%;
+    height: calc(80vh - 180px);
+    overflow-y: auto;
+}
+ .block .imgbx{
+    position: relative;
+    min-width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.block .details {
+    position: relative;
+    width: 100%;
+}
+ .block .details h4{
+    font-size: 20px;
+    
+}
+.cover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.block .details .message{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 0 20px;
+}
+.block span{
+    display: flex;
+    width: 100px;
+    padding-top: 17px;
+    
+}
+.block i{
+    padding: 10px;
+    font-size: 24px;
+}
+
+.status{
+    display: flex;
+}
+.status:hover{
+    color: rgb(133, 137, 141);
+}
+
+.buttons{
+    display: flex;
+   }
+   .accept{
+    background-color: rgb(92, 194, 105);
+    padding: 6px;
+    border-radius: 7px;
+    border: none;
+    margin: 5px;
+    font-weight: bold;
+    color: white;
+}
+.cancel{
+    padding: 6px;
+    border-radius: 7px;
+    border: none;
+    margin: 5px;
+    margin-right: 10px;
+    font-weight: bold;
+    color: white;
+    background-color:  rgb(102, 97, 97);
+}
+@media only screen and (max-width: 600px) {
+    .block{
+        background-color:rgb(56, 56, 56) ;
+        position: relative;
+        min-width: 100%;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+         align-items: center; 
+        padding-left: 10px;
+        padding-top:8px ;
+        cursor: pointer;
+        color: white;
+    }
+    .items{
+        width: 100%;
+    }
+
+}

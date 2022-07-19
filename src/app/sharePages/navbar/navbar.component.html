@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Online Chat</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav ms-auto">
+            
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/profile">
+                <img class="avatar" [src]="image">
+                {{name}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mt-1" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}"><i class="bi bi-chat-fill"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mt-1" (click)="FreindRequists()">
+              <i class="bi bi-person-fill"></i>
+              <div *ngIf="messageServcies.requists> 0 && messageServcies.requists<10" class="notification">
+               <span>{{messageServcies.requists}}</span>
+              </div>
+              <div *ngIf="messageServcies.requists >=10" class="notification">
+                <span>+9</span>
+               </div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mt-1" routerLink="/search" routerLinkActive="active" ><i class="bi bi-search"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mt-1 logout" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+       
+      </div>
+    </div>
+  </nav>    
